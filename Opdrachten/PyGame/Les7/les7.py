@@ -8,6 +8,8 @@
 #   - Als de speler dan op spatie drukt, start het spel dan opnieuw (game_actief = True)
 
 # Slides: https://docs.google.com/presentation/d/1fzbS39wrbh226ts72wHhQzyjpxuYxhqV9pEE8XcwTPM/edit?usp=sharing
+import os
+os.environ['SDL_AUDIODRIVER'] = 'dsp'
 
 import pygame, sys
 from pygame.locals import QUIT
@@ -24,7 +26,7 @@ background_surface.fill("white")
 enemy_surface = font.render("Dood!", False, "red")
 enemy_rect = enemy_surface.get_rect(center= (300, 200))
 
-pikachu_surface = pygame.image.load("graphics/pikachu.png").convert_alpha()
+pikachu_surface = pygame.image.load("Opdrachten/PyGame/Les7/graphics/pikachu.png").convert_alpha()
 pikachu_rect = pikachu_surface.get_rect(topleft = (180, 20))
 
 zwaartekracht = 0

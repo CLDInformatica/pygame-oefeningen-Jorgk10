@@ -17,6 +17,8 @@ Extra tijd:
 
 Slides: https://docs.google.com/presentation/d/1c4C94q8OcMGCIFefVo18Xac4WIFJacq5Eutj1gY6rCg/edit?usp=sharing
 '''
+import os
+os.environ['SDL_AUDIODRIVER'] = 'dsp'
 
 import pygame
 
@@ -26,9 +28,9 @@ screen = pygame.display.set_mode((800, 400))
 pygame.display.set_caption('Voetbal game!')
 clock = pygame.time.Clock()
 running = True
-test_font = pygame.font.Font("fonts/horror.ttf", 50)
+test_font = pygame.font.Font("Opdrachten/PyGame/Les2/fonts/horror.ttf", 50)
 
-voetbal_surface = pygame.image.load("graphics/voetbal.png")
+voetbal_surface = pygame.image.load("Opdrachten/PyGame/Les2/graphics/voetbal.png")
 tekst_surface = test_font.render("Voetbal game", False, "green")
 
 while running:

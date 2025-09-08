@@ -20,7 +20,8 @@ Maak het spel leuker door mooie achtergronden en plaatjes te gebruiken. Zo wordt
 
 Slides: https://docs.google.com/presentation/d/1tnd7la5uNy5jzyHuBGmD2M-jPWfoy2RBY6XqtKHJ1zY/edit?usp=sharing
 '''
-
+import os
+os.environ['SDL_AUDIODRIVER'] = 'dsp'
 
 import pygame, sys
 from pygame.locals import QUIT

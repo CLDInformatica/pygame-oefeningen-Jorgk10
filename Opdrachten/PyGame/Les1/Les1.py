@@ -4,6 +4,8 @@ Maak het plaatje dat in dit mapje staat na.
 Slides: 
 https://docs.google.com/presentation/d/1YwoUdeWABUYJkSfNzzZzDbCKvCVmWoo9Z5Uu7f_Y_K4/edit?usp=sharing
 '''
+import os
+os.environ['SDL_AUDIODRIVER'] = 'dsp'
 
 import pygame
 

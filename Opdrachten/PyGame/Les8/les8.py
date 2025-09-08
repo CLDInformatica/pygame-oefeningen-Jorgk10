@@ -6,6 +6,8 @@
 
 # Slides:
 # https://docs.google.com/presentation/d/1fypqkKR8hXHAcCNLEhVTnleWQov4aNpeM4in-MXKF1Q/edit?usp=sharing
+import os
+os.environ['SDL_AUDIODRIVER'] = 'dsp'
 
 import pygame, sys
 from pygame.locals import QUIT
@@ -28,7 +30,7 @@ background_surface.fill("white")
 enemy_surface = font.render("Dood!", False, "red")
 enemy_rect = enemy_surface.get_rect(center= (300, 200))
 
-pikachu_surface = pygame.image.load("graphics/pikachu.png").convert_alpha()
+pikachu_surface = pygame.image.load("Opdrachten/PyGame/Les8/graphics/pikachu.png").convert_alpha()
 pikachu_rect = pikachu_surface.get_rect(topleft = (180, 20))
 
 zwaartekracht = 0

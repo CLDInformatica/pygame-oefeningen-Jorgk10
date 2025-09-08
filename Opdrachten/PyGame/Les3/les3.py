@@ -6,6 +6,8 @@ Voeg de volgende 2 dingen aan de game toe:
 
 Slides: https://docs.google.com/presentation/d/16rz2C4Pqhx4YNCokEU_5mc3rtQXXNEoi7gFAGzv9s_A/edit?usp=sharing
 '''
+import os
+os.environ['SDL_AUDIODRIVER'] = 'dsp'
 
 import pygame
 
@@ -19,7 +21,7 @@ running = True
 background_surface = pygame.Surface((800, 400))
 background_surface.fill("white")
 
-auto_surface = pygame.image.load("graphics/auto.png").convert_alpha()
+auto_surface = pygame.image.load("Opdrachten/PyGame/Les3/graphics/auto.png").convert_alpha()
 auto_x_pos = 200
 
 while running:

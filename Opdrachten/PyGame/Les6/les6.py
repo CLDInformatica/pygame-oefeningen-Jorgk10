@@ -9,6 +9,8 @@
 
 
 # Slides: https://docs.google.com/presentation/d/1tbN7TAxkqwNQWe_fMOwF1KD4o2V5aJktcSooPF9WZaY/edit?usp=sharing
+import os
+os.environ['SDL_AUDIODRIVER'] = 'dsp'
 
 import pygame, sys
 from pygame.locals import QUIT
@@ -21,7 +23,7 @@ clock = pygame.time.Clock()
 background_surface = pygame.Surface((400, 300))
 background_surface.fill("white")
 
-pikachu_surface = pygame.image.load("graphics/pikachu.png").convert_alpha()
+pikachu_surface = pygame.image.load("Opdrachten/PyGame/Les6/graphics/pikachu.png").convert_alpha()
 pikachu_rect = pikachu_surface.get_rect(topleft = (180, 20))
 
 zwaartekracht = 0
