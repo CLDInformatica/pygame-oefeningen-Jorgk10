@@ -24,8 +24,8 @@ import pygame
 
 pygame.init()
 
-screen = pygame.display.set_mode((800, 400))
-pygame.display.set_caption('Voetbal game!')
+screen = pygame.display.set_mode((1920, 1080))
+pygame.display.set_caption('Fortnite')
 clock = pygame.time.Clock()
 running = True
 test_font = pygame.font.Font("Opdrachten/PyGame/Les2/fonts/horror.ttf", 50)
