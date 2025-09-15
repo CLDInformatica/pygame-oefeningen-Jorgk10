@@ -24,6 +24,26 @@ background_surface.fill("white")
 auto_surface = pygame.image.load("Opdrachten/PyGame/Les3/graphics/auto.png").convert_alpha()
 auto_x_pos = 200
 
+regen = pygame.image.load("Opdrachten/PyGame/Les3/graphics/Regendruppel.png").convert_alpha()
+DEFAULT_IMAGE_SIZE = (regen.get_width() // 8, regen.get_height() // 8)
+regen_small = pygame.transform.scale(regen, DEFAULT_IMAGE_SIZE)
+regen_y_pos = -80
+
+regen1 = pygame.image.load("Opdrachten/PyGame/Les3/graphics/Regendruppel.png").convert_alpha()
+DEFAULT_IMAGE_SIZE = (regen1.get_width() // 8, regen1.get_height() // 8)
+regen1_small = pygame.transform.scale(regen1, DEFAULT_IMAGE_SIZE)
+regen1_y_pos = -130
+
+regen2 = pygame.image.load("Opdrachten/PyGame/Les3/graphics/Regendruppel.png").convert_alpha()
+DEFAULT_IMAGE_SIZE = (regen2.get_width() // 8, regen2.get_height() // 8)
+regen2_small = pygame.transform.scale(regen2, DEFAULT_IMAGE_SIZE)
+regen2_y_pos = -200
+
+regen3 = pygame.image.load("Opdrachten/PyGame/Les3/graphics/Regendruppel.png").convert_alpha()
+DEFAULT_IMAGE_SIZE = (regen3.get_width() // 8, regen3.get_height() // 8)
+regen3_small = pygame.transform.scale(regen3, DEFAULT_IMAGE_SIZE)
+regen3_y_pos = -220
+
 while running:
 
     for event in pygame.event.get():
@@ -35,5 +55,32 @@ while running:
     auto_x_pos += 1
     screen.blit(auto_surface, (auto_x_pos, 200))
 
+    regen_y_pos += 1
+    screen.blit(regen_small, (200, regen_y_pos))
+
+    regen1_y_pos += 1
+    screen.blit(regen1_small, (600, regen1_y_pos))
+    
+    regen2_y_pos += 1
+    screen.blit(regen2_small, (400, regen2_y_pos))
+
+    regen3_y_pos += 1
+    screen.blit(regen3_small, (100, regen3_y_pos))
+
     pygame.display.update()
     clock.tick(60)
+
+    if auto_x_pos == 800:
+      auto_x_pos -= 900
+
+    if regen_y_pos == 400:
+      regen_y_pos -= 480
+    
+    if regen1_y_pos == 400:
+      regen1_y_pos -= 530
+
+    if regen2_y_pos == 400:
+      regen2_y_pos -= 600
+    
+    if regen3_y_pos == 400:
+      regen3_y_pos -= 620
