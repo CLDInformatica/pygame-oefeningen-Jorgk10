@@ -19,9 +19,9 @@ Blit een stukje tekst "Game over" naar het scherm als de auto de pion raakt.
 Slides: https://docs.google.com/presentation/d/1VjYiTjIcSU_x6R_K0pPASkzf7xis3oa_IpjzcmC-Wq8/edit?usp=sharing
 '''
 import os
-os.environ['SDL_AUDIODRIVER'] = 'dsp'
-
 import pygame
+
+os.environ['SDL_AUDIODRIVER'] = 'dsp'
 
 pygame.init()
 
@@ -31,30 +31,48 @@ clock = pygame.time.Clock()
 running = True
 
 background_surface = pygame.Surface((800, 400))
-background_surface.fill("white")
+background_surface.fill("Dark Green")
 
 weg_surface = pygame.image.load("Opdrachten/PyGame/Les4/graphics/weg.png").convert()
+weg_rect = weg_surface.get_rect(center=(399, 200))
 
 auto_surface = pygame.image.load("Opdrachten/PyGame/Les4/graphics/auto.png").convert_alpha()
-auto_rect = auto_surface.get_rect(bottom = 350)
+auto_rect = auto_surface.get_rect(bottom=weg_rect.bottom - 10)
 
 obstakel_surface = pygame.image.load("Opdrachten/PyGame/Les4/graphics/obstakel.png").convert_alpha()
-obstakel_rect = obstakel_surface.get_rect(bottomleft = (625, 280))
+obstakel_rect = obstakel_surface.get_rect(bottomleft=(625, 280))
+
+Explosion = pygame.image.load("Opdrachten/PyGame/Les4/graphics/download.png").convert_alpha()
+
+font = pygame.font.Font(None, 74)
+
+auto_beweegt = True
 
 while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
 
-  for event in pygame.event.get():
-    if event.type == pygame.QUIT:
-      running = False
+    screen.blit(background_surface, (0, 0))
+    screen.blit(weg_surface, weg_rect)
 
-  screen.blit(background_surface, (0, 0))
-  screen.blit(weg_surface, (0, 75))
-  screen.blit(obstakel_surface, obstakel_rect)
-  
-  auto_rect.left += 2
-  if auto_rect.left > 800:
-    auto_rect.right = 0
-  screen.blit(auto_surface, auto_rect)
+    if auto_beweegt:
+        auto_rect.left += 2
+        if auto_rect.left > 800:
+            auto_rect.right = 0
+            screen.blit(auto_surface, auto_rect)
 
-  pygame.display.update()
-  clock.tick(60)
+    if auto_rect.colliderect(obstakel_rect):
+        auto_beweegt = False
+        screen.blit(Explosion, (480, 135))
+    else:
+        screen.blit(auto_surface, auto_rect)
+
+    
+    screen.blit(obstakel_surface, obstakel_rect)
+
+    if not auto_beweegt:
+        screen.blit(auto_surface, auto_rect)
+
+    pygame.display.update()
+    clock.tick(60)
