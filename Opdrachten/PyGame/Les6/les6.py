@@ -27,6 +27,7 @@ pikachu_surface = pygame.image.load("Opdrachten/PyGame/Les6/graphics/pikachu.png
 pikachu_rect = pikachu_surface.get_rect(topleft = (180, 20))
 
 zwaartekracht = 0
+Xas = 0
 
 while True:
   
@@ -36,16 +37,38 @@ while True:
       sys.exit() 
       
     if event.type == pygame.KEYDOWN:
-      if event.key == pygame.K_SPACE:
+      if event.key == pygame.K_SPACE and pikachu_rect.bottom == 300:
         zwaartekracht = -20
+    
+    if event.type == pygame.KEYDOWN:
+      if event.key == pygame.K_RIGHT:
+        Xas = 5
+      if event.key == pygame.K_LEFT:
+        Xas = -5
 
+    if event.type == pygame.KEYUP:
+      if event.key == pygame.K_RIGHT and Xas > 0:
+        Xas = 0
+      if event.key == pygame.K_LEFT and Xas < 0:
+        Xas = 0
+    
+    
+      
+
+  
   screen.blit(background_surface, (0, 0))
  
   zwaartekracht += 1
   pikachu_rect.y += zwaartekracht
+  pikachu_rect.x += Xas
 
   if pikachu_rect.bottom >= 300:
     pikachu_rect.bottom = 300
+  if pikachu_rect.left <= 0:
+    pikachu_rect.left = 0
+  if pikachu_rect.right >= 400:
+    pikachu_rect.right = 400
+  
   
   screen.blit(pikachu_surface, pikachu_rect)
 

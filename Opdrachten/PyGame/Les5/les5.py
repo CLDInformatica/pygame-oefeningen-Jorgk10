@@ -2,9 +2,13 @@
 Gegeven is een oefenprogramma. Beantwoord de volgende vragen:
 
   - Wat gebeurt er als je met je muis over het stukje tekst heen gaat?
+  hij print collision
   - Wat gebeurt er als je op het stukje tekst klikt?
+  hij print tekst ingedrukt
   - Wat gebeurt er als je het stukje tekst loslaat na inklikken?
+  hij print tekst losgelaten
   - Wat gebeurt er als je je muis stil laat staan op het stukje tekst? (MOUSEMOTION)
+  er wordt niks geprint als die stilstaat maar wel als je muis begint met bewegen
 
 Doe nu zelf het volgende:
 
@@ -21,8 +25,6 @@ Maak het spel leuker door mooie achtergronden en plaatjes te gebruiken. Zo wordt
 Slides: https://docs.google.com/presentation/d/1tnd7la5uNy5jzyHuBGmD2M-jPWfoy2RBY6XqtKHJ1zY/edit?usp=sharing
 '''
 import os
-os.environ['SDL_AUDIODRIVER'] = 'dsp'
-
 import pygame, sys
 from pygame.locals import QUIT
 
@@ -35,28 +37,39 @@ clock = pygame.time.Clock()
 background_surface = pygame.Surface((400, 300))
 background_surface.fill("white")
 
-tekst_surface = test_font.render("Stukje tekst!", False, "green")
-tekst_rect = tekst_surface.get_rect(center = (200, 150))
+tekst_surface = test_font.render("Stukje tekst!", False, "black")
+tekst_rect = tekst_surface.get_rect(center=(200, 150))
+
+Gewonnen = test_font.render("Gewonnen!", False, "green")
+gew_rect = Gewonnen.get_rect(center=(200, 150))
+
+DisTekst = True
 
 while True:
-  
-  for event in pygame.event.get():
-    if event.type == QUIT:
-      pygame.quit()
-      sys.exit() 
-      
-    if event.type == pygame.MOUSEMOTION:
-      if tekst_rect.collidepoint(event.pos):
-        print("Collision")
-    if event.type == pygame.MOUSEBUTTONDOWN:
-      if tekst_rect.collidepoint(event.pos):
-        print("Tekst ingedrukt")
-    if event.type == pygame.MOUSEBUTTONUP:
-      if tekst_rect.collidepoint(event.pos):
-        print("Tekst losgelaten")
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
 
-  screen.blit(background_surface, (0, 0))
-  screen.blit(tekst_surface, tekst_rect)
+        if event.type == pygame.MOUSEMOTION:
+            pass
 
-  pygame.display.update()
-  clock.tick(60)
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if tekst_rect.collidepoint(event.pos):
+                tekst_rect.right += 10 
+
+    
+    screen.blit(background_surface, (0, 0))
+
+    if tekst_rect.right < 400:
+        screen.blit(tekst_surface, tekst_rect)
+
+    if tekst_rect.right >= 400:
+        screen.blit(Gewonnen, gew_rect)
+        
+
+
+
+
+    pygame.display.update()
+    clock.tick(60)
