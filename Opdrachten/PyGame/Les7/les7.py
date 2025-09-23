@@ -33,32 +33,51 @@ zwaartekracht = 0
 game_actief = True
 
 while True:
+  if game_actief == True:
+
+    for event in pygame.event.get():
+      if event.type == QUIT:
+        pygame.quit()
+        sys.exit() 
+        
+      if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_SPACE and pikachu_rect.bottom >= 300:
+          zwaartekracht = -20
+
+    screen.blit(background_surface, (0, 0))
+    screen.blit(enemy_surface, enemy_rect)
+
+    zwaartekracht += 1
+    pikachu_rect.y += zwaartekracht
+
+    if pikachu_rect.bottom >= 300:
+      pikachu_rect.bottom = 300
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_RIGHT] and pikachu_rect.right + 6 <= 400:
+      pikachu_rect.x += 6
+    if keys[pygame.K_LEFT] and pikachu_rect.left - 6 >= 0:
+      pikachu_rect.x -= 6
+
+    if pikachu_rect.colliderect(enemy_rect):
+      game_actief = False
+    
+    screen.blit(pikachu_surface, pikachu_rect)
+
+    pygame.display.update()
+    clock.tick(60)
   
-  for event in pygame.event.get():
-    if event.type == QUIT:
-      pygame.quit()
-      sys.exit() 
-      
-    if event.type == pygame.KEYDOWN:
-      if event.key == pygame.K_SPACE and pikachu_rect.bottom >= 300:
-        zwaartekracht = -20
-
-  screen.blit(background_surface, (0, 0))
-  screen.blit(enemy_surface, enemy_rect)
-
-  zwaartekracht += 1
-  pikachu_rect.y += zwaartekracht
-
-  if pikachu_rect.bottom >= 300:
-    pikachu_rect.bottom = 300
-
-  keys = pygame.key.get_pressed()
-  if keys[pygame.K_RIGHT] and pikachu_rect.right + 6 <= 400:
-    pikachu_rect.x += 6
-  if keys[pygame.K_LEFT] and pikachu_rect.left - 6 >= 0:
-    pikachu_rect.x -= 6
+  if game_actief == False:
+    background_surface.fill("black")
+    pikachu_rect.center = (200, 150)
+    pygame.display.update()
+    screen.blit(background_surface, (0, 0))
+    for event in pygame.event.get(): 
+      if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_SPACE:
+          game_actief = True
+          background_surface.fill("white")
+          pygame.display.update()
+          
   
   screen.blit(pikachu_surface, pikachu_rect)
-
-  pygame.display.update()
-  clock.tick(60)
