@@ -23,11 +23,18 @@ speler_stil1_surface = pygame.image.load("Opdrachten/PyGame/Les9/graphics/speler
 speler_stil2_surface = pygame.image.load("Opdrachten/PyGame/Les9/graphics/speler_stil2.png").convert_alpha()
 animaties = [speler_stil1_surface, speler_stil2_surface]
 
+L_speler_stil1_surface = pygame.image.load("Opdrachten/PyGame/Les9/graphics/L_speler_stil1.png").convert_alpha()
+L_speler_stil2_surface = pygame.image.load("Opdrachten/PyGame/Les9/graphics/L_speler_stil2.png").convert_alpha()
+L_animaties = [L_speler_stil1_surface, L_speler_stil2_surface]
+
 index = 0
 speler_jump_surface = pygame.image.load("Opdrachten/PyGame/Les9/graphics/speler_jump.png").convert_alpha()
+L_speler_jump_surface = pygame.image.load("Opdrachten/PyGame/Les9/graphics/L_speler_jump.png").convert_alpha()
 speler_rect = speler_stil1_surface.get_rect(midbottom = (200, 300))
 
 zwaartekracht = 0
+Xas = 0
+kijkt_links = False
 
 while True:
   
@@ -35,25 +42,64 @@ while True:
     if event.type == QUIT:
       pygame.quit()
       sys.exit() 
+    
 
     if event.type == pygame.KEYDOWN:
       if event.key == pygame.K_SPACE and speler_rect.bottom >= 300:
         zwaartekracht = -20
+      if event.key == pygame.K_d:
+        Xas = 5
+        kijkt_links = False
+      if event.key == pygame.K_a:
+        Xas = -5
+        kijkt_links = True
+
+    if event.type == pygame.KEYUP:
+      if event.key == pygame.K_d and Xas > 0:
+        Xas = 0
+      if event.key == pygame.K_a and Xas < 0:
+        Xas = 0
+  
         
   screen.blit(background_surface, (0, 0))
 
   zwaartekracht += 1
   speler_rect.y += zwaartekracht
+  speler_rect.x += Xas
   
   if speler_rect.bottom >= 300:
     speler_rect.bottom = 300
+  if speler_rect.left <= 0:
+    speler_rect.left = 0
+  if speler_rect.right >= 400:
+    speler_rect.right = 400
 
   index += 0.05
   
   if index > len(animaties):
     index = 0
+
     
-  screen.blit(animaties[int(index)], speler_rect)
+
+ 
+
+
+
+  if kijkt_links == True and speler_rect.bottom < 300:
+    screen.blit(L_speler_jump_surface, speler_rect)
+  elif kijkt_links == False and speler_rect.bottom < 300:
+    screen.blit(speler_jump_surface, speler_rect)
+  elif kijkt_links == True and Xas == -5:
+    screen.blit(L_animaties[int(index)], speler_rect)  
+  elif kijkt_links == False and Xas == 5:
+    screen.blit(animaties[int(index)], speler_rect)
+  elif kijkt_links == True:
+    screen.blit(L_speler_stil1_surface, speler_rect) 
+  elif kijkt_links == False:
+    screen.blit(speler_stil1_surface, speler_rect) 
+
+
+    
 
   pygame.display.update()
   clock.tick(60)
