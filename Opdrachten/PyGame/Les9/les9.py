@@ -79,12 +79,6 @@ while True:
   if index > len(animaties):
     index = 0
 
-    
-
- 
-
-
-
   if kijkt_links == True and speler_rect.bottom < 300:
     screen.blit(L_speler_jump_surface, speler_rect)
   elif kijkt_links == False and speler_rect.bottom < 300:

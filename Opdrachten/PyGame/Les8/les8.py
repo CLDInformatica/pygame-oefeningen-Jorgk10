@@ -51,7 +51,7 @@ while True:
   if game_actief:
     screen.blit(background_surface, (0, 0))
     screen.blit(enemy_surface, enemy_rect)
-    
+  
     time = pygame.time.get_ticks() - Start_Time
     time_sec = time // 1000
     score_surface = font.render(str(time_sec), False, "orange")
